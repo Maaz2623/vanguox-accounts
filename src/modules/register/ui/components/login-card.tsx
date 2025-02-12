@@ -60,14 +60,9 @@ export const LoginCard = () => {
       toast.success(`Logged in successfully`);
     } catch (error) {
       if (error instanceof Error) {
+        toast.error(error.message);
         if (error.message === "NEXT_REDIRECT") {
-          return;
-        }
-        if (error.message === "INVALID_EMAIL") {
-          return toast.error("User does not exist");
-        }
-        if (error.message === "INVALID_CREDENTIALS") {
-          return toast.error("Invalid credentials");
+          console.log(error);
         }
       }
       toast.error("Some error occured");
