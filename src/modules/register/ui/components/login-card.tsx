@@ -70,6 +70,7 @@ export const LoginCard = () => {
           return toast.error("Invalid credentials");
         }
       }
+      toast.error("Some error occured");
     } finally {
       setLoading(false);
     }
