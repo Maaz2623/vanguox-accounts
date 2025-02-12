@@ -59,12 +59,7 @@ export const LoginCard = () => {
       });
       toast.success(`Logged in successfully`);
     } catch (error) {
-      if (error instanceof Error && error.message === "INVALID_EMAIL") {
-        toast.error("User does not exist");
-      }
-      if (error instanceof Error && error.message === "INVALID_PASSWORD") {
-        toast.error("Invalid credentials");
-      }
+      toast.error(error)
     } finally {
       setLoading(false);
     }
