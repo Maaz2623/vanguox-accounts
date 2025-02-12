@@ -60,12 +60,10 @@ export const LoginCard = () => {
       toast.success(`Logged in successfully`);
     } catch (error) {
       if (error instanceof Error) {
-        toast.error(error.message);
-        if (error.message === "NEXT_REDIRECT") {
-          console.log(error);
+        if (error.message !== "NEXT_REDIRECT") {
+          toast.error(error.message);
         }
       }
-      toast.error("Some error occured");
     } finally {
       setLoading(false);
     }
