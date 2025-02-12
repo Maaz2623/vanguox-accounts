@@ -78,6 +78,6 @@ export const login = async ({
   await signIn("credentials", {
     email,
     password,
-    redirect: true,
+    redirect: false,
   });
 };
