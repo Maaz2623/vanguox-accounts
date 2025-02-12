@@ -18,7 +18,7 @@ import Link from "next/link";
 import toast from "react-hot-toast";
 import { login } from "@/actions/auth.actions";
 import { useState } from "react";
-import { useSearchParams } from "next/navigation";
+import { redirect, useSearchParams } from "next/navigation";
 
 const formSchema = z.object({
   email: z.string().min(2).max(100).email("Invalid email format"),
@@ -58,8 +58,13 @@ export const LoginCard = () => {
         password: values.password,
       });
       toast.success(`Logged in successfully`);
+      if (redirect_url) {
+        window.location.href = redirect_url;
+      } else {
+        redirect("/");
+      }
     } catch (error) {
-      toast.error(error)
+      toast.error(error);
     } finally {
       setLoading(false);
     }
