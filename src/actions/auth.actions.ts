@@ -26,7 +26,7 @@ export const register = async ({
     .where(eq(users.email, email));
 
   if (existingUser) {
-    throw new Error(`User already exists`);
+    throw new Error(`EMAIL_EXISTS`);
   }
 
   const [newUser] = await db
@@ -64,7 +64,7 @@ export const login = async ({
   if (!userExists) {
     // No user found, so this is their first attempt to login
     // Optionally, this is also the place you could do a user registration
-    throw new Error("User does not exist");
+    throw new Error("INVALID_EMAIL");
   }
 
   const isPasswordMatch = await bcrypt.compare(
@@ -73,7 +73,7 @@ export const login = async ({
   );
 
   if (!isPasswordMatch) {
-    throw new Error(`Invalid Credentials`);
+    throw new Error("INVALID_PASSWORD");
   }
   await signIn("credentials", {
     email,

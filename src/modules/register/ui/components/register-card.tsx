@@ -88,7 +88,10 @@ export const RegisterCard = () => {
       if (error instanceof Error) {
         toast.error(error.message);
         if (error.message === "NEXT_REDIRECT") {
-          return;
+          console.log(error);
+        }
+        if (error.message === "EMAIL_EXISTS") {
+          toast.error("User already exists");
         }
       } else {
         toast.error("An unknown error occured");
