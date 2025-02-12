@@ -41,12 +41,12 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
       },
     }),
   ],
-  // callbacks: {
-  //   async redirect({ url, baseUrl }) {
-  //     // Redirect to the app on 3001 after successful login
-  //     const redirectUrl = new URL(url).searchParams.get("redirect_url");
-  //     if (redirectUrl) return redirectUrl;
-  //     return baseUrl;
-  //   },
-  // },
+  callbacks: {
+    async redirect({ url, baseUrl }) {
+      // Redirect to the app on 3001 after successful login
+      const redirectUrl = new URL(url).searchParams.get("redirect_url");
+      if (redirectUrl) return redirectUrl;
+      return baseUrl;
+    },
+  },
 });
