@@ -64,10 +64,10 @@ export const LoginCard = () => {
           return;
         }
         if (error.message === "INVALID_EMAIL") {
-          toast.error("User does not exist");
+          return toast.error("User does not exist");
         }
         if (error.message === "INVALID_CREDENTIALS") {
-          toast.error("Invalid credentials");
+          return toast.error("Invalid credentials");
         }
       }
     } finally {
