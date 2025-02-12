@@ -60,9 +60,7 @@ export const LoginCard = () => {
       toast.success(`Logged in successfully`);
     } catch (error) {
       if (error instanceof Error) {
-        if (error.message !== "NEXT_REDIRECT") {
-          toast.error(error.message);
-        }
+        toast.error("Check your credentials");
       }
     } finally {
       setLoading(false);
