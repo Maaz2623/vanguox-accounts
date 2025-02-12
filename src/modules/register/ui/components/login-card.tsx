@@ -64,7 +64,9 @@ export const LoginCard = () => {
         redirect("/");
       }
     } catch (error) {
-      toast.error(error);
+      if (error instanceof Error) {
+        toast.error(error.message);
+      }
     } finally {
       setLoading(false);
     }
