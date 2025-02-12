@@ -86,7 +86,6 @@ export const RegisterCard = () => {
       toast.success("Registered successfully");
     } catch (error) {
       if (error instanceof Error) {
-        toast.error(error.message);
         if (error.message === "NEXT_REDIRECT") {
           console.log(error);
         }

@@ -26,7 +26,7 @@ export const register = async ({
     .where(eq(users.email, email));
 
   if (existingUser) {
-    throw new Error(`EMAIL_EXISTS`);
+    throw new Error("EMAIL_EXISTS");
   }
 
   const [newUser] = await db
