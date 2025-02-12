@@ -24,7 +24,7 @@ import {
   InputOTPSlot,
 } from "@/components/ui/input-otp";
 import { register } from "@/actions/auth.actions";
-import { usePathname } from "next/navigation";
+import { usePathname, useSearchParams } from "next/navigation";
 
 const formSchema = z.object({
   firstName: z.string().min(2).max(50),
@@ -45,6 +45,11 @@ const formSchema = z.object({
 
 export const RegisterCard = () => {
   const pathname = usePathname();
+
+  const searchParams = useSearchParams();
+
+  const redirect_url = searchParams.get("redirect_url");
+
   const [confirmPassword, setConfirmPassword] = useState("");
   const [securityPin, setSecurityPin] = useState("");
 
@@ -82,10 +87,11 @@ export const RegisterCard = () => {
     } catch (error) {
       if (error instanceof Error) {
         toast.error(error.message);
-        console.log(error);
+        if (error.message === "NEXT_REDIRECT") {
+          return;
+        }
       } else {
-        toast.error("An unknown error occurred");
-        console.log("Unknown error:", error);
+        toast.error("An unknown error occured");
       }
     } finally {
       setLoading(false);
@@ -234,7 +240,9 @@ export const RegisterCard = () => {
               <p className="text-sm text-gray-800 font-medium">
                 Already have an account?{" "}
                 <Link
-                  href={`/sign-in`}
+                  href={`/sign-in?redirect_url=${
+                    redirect_url && encodeURIComponent(redirect_url)
+                  }`}
                   className="underline-offset-2 underline"
                 >
                   Login

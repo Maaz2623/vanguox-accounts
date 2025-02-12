@@ -59,8 +59,12 @@ export const LoginCard = () => {
       });
       toast.success(`Logged in successfully`);
     } catch (error) {
-      toast.error(`Check your credentials`);
-      console.log(error);
+      if (error instanceof Error) {
+        if (error.message === "NEXT_REDIRECT") {
+          return;
+        }
+        toast.error(error.message);
+      }
     } finally {
       setLoading(false);
     }
@@ -130,7 +134,7 @@ export const LoginCard = () => {
               <p className="text-sm">
                 Don&apos;t have an account?{" "}
                 <Link
-                  href={`/register?${
+                  href={`/register?redirect_url=${
                     redirect_url && encodeURIComponent(redirect_url)
                   }`}
                   className="underline underline-offset-2"

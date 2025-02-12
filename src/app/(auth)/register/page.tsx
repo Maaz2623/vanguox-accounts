@@ -1,8 +1,13 @@
+import FullscreenLoader from "@/components/fullscreen-loader";
 import { RegisterCard } from "@/modules/register/ui/components/register-card";
-import React from "react";
+import React, { Suspense } from "react";
 
 const AddAccountPage = () => {
-  return <RegisterCard />;
+  return (
+    <Suspense fallback={<FullscreenLoader />}>
+      <RegisterCard />
+    </Suspense>
+  );
 };
 
 export default AddAccountPage;
