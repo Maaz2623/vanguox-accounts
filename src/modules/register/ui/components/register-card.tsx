@@ -24,7 +24,7 @@ import {
   InputOTPSlot,
 } from "@/components/ui/input-otp";
 import { register } from "@/actions/auth.actions";
-import { usePathname, useSearchParams } from "next/navigation";
+import { redirect, usePathname, useSearchParams } from "next/navigation";
 
 const formSchema = z.object({
   firstName: z.string().min(2).max(50),
@@ -84,6 +84,11 @@ export const RegisterCard = () => {
         securityPin: securityPin,
       });
       toast.success("Registered successfully");
+      if (redirect_url) {
+        window.location.href = redirect_url;
+      } else {
+        redirect("/");
+      }
     } catch (error) {
       if (error instanceof Error) {
         if (error.message === "NEXT_REDIRECT") {
